@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ericson_Tv Chat Box Overlay</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="Image Ordner/IMG Website Icon Ordner/Website Icon.png"
+    />
+    <style>
+      :root {
+        --font-family-var: "Roboto-Bold", Helvetica, sans-serif;
+        --background-color-var: rgba(0, 0, 0, 0);
+        --background-var: rgb(0, 0, 0);
+        --aspect-ratio-bg-var: 110px;
+        --aspect-ratio-img-var: 90px;
+        --border-var: 1px solid rgba(255, 0, 0, 0);
+        --padding-block-inline-var: 5px 5px;
+        --margin-top-left-bottom-right-var: 5px 5px 5px 5px;
+        --animation-transition-time-var: 750ms;
+      }
+
+      @font-face {
+        font-family: var(--font-family-var);
+        src: local("Roboto/Roboto-Bold.woff2") url("Roboto/Roboto-Bold.woff2")
+          format("woff2");
+        font-weight: normal, bold;
+        font-style: normal;
+        font-display: swap;
+        font-variant: normal;
+      }
+
+      *,
+      *::before,
+      *::after,
+      ::backdrop {
+        font-family: var(--font-family-var);
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        font-family: var(--font-family-var);
+        background: var(--background-color-var);
+        width: 100%;
+        height: 100%;
+        overflow: hidden hidden;
+        border: none;
+        padding: 0px 0px;
+        margin: 0px 0px 0px 0px;
+      }
+
+      body {
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      body::-webkit-scrollbar {
+        display: none;
+      }
+
+      .main-chat-box-overlay-container {
+        background: rgba(0, 0, 0, 0);
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        display: flex;
+        align-items: start;
+        align-content: center;
+        justify-items: center;
+        justify-content: end;
+        flex-direction: column;
+        border: var(--border-var);
+        padding: 0px 0px;
+        margin: 0px 0px 0px 0px;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .main-chat-box-overlay-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .twitch-profile-container {
+        background: var(--background-color-var);
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-items: center;
+        justify-content: start;
+        flex-direction: row;
+        border: var(--border-var);
+        padding: var(--padding-block-inline-var);
+        margin: var(--margin-top-left-bottom-right-var);
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .twitch-profile-part-one-container {
+        background: var(--background-color-var);
+        width: auto;
+        height: auto;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-items: center;
+        justify-content: center;
+        flex-direction: row;
+        border: var(--border-var);
+        padding: var(--padding-block-inline-var);
+        margin: var(--margin-top-left-bottom-right-var);
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .twitch-profile-bg-img-container {
+        background: var(--background-color-var);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-items: center;
+        justify-content: start;
+        border: var(--border-var);
+        padding: var(--padding-block-inline-var);
+        margin: var(--margin-top-left-bottom-right-var);
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .twitch-profile-bg-container {
+        background: var(--background-var);
+        width: var(--aspect-ratio-bg-var);
+        max-width: var(--aspect-ratio-bg-var);
+        height: var(--aspect-ratio-bg-var);
+        max-height: var(--aspect-ratio-bg-var);
+        aspect-ratio: auto 1 / 1;
+        object-fit: cover;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-items: center;
+        justify-content: center;
+        border: 1px solid rgb(0, 0, 0);
+        clip-path: circle(50% at 50% 50%);
+        border-radius: 50%;
+        padding: 0px 0px;
+        margin: 0.55px 0.55px 0.55px 0.55px;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .twitch-profile-img {
+        background: var(--background-color-var);
+        width: var(--aspect-ratio-img-var);
+        max-width: var(--aspect-ratio-img-var);
+        height: var(--aspect-ratio-img-var);
+        max-height: var(--aspect-ratio-img-var);
+        aspect-ratio: auto 1 / 1;
+        object-fit: cover;
+        overflow: hidden hidden;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-items: center;
+        justify-content: center;
+        border: var(--border-var);
+        clip-path: circle(50% at 50% 50%);
+        border-radius: 50%;
+        padding: 0px 0px;
+        margin: 1.8px 1.8px 1.8px 1.8px;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .twitch-profile-name-container {
+        background: var(--background-color-var);
+        width: auto;
+        height: auto;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-items: center;
+        justify-content: center;
+        border: var(--border-var);
+        padding: var(--padding-block-inline-var);
+        margin: var(--margin-top-left-bottom-right-var);
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .twitch-profile-name-span {
+        background: var(--background-color-var);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-items: center;
+        justify-content: start;
+        border: var(--border-var);
+        padding: var(--padding-block-inline-var);
+        margin: var(--margin-top-left-bottom-right-var);
+        text-align: center;
+        font-size: 20px;
+        color: rgb(255, 255, 255);
+        text-shadow: 1px 1px 1px rgb(0, 0, 0);
+        text-decoration: none;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .twitch-profile-part-two-container {
+        background: var(--background-color-var);
+        width: auto;
+        height: auto;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-items: center;
+        justify-content: center;
+        flex-direction: row;
+        border: var(--border-var);
+        padding: var(--padding-block-inline-var);
+        margin: var(--margin-top-left-bottom-right-var);
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .twitch-profile-msg-text-container {
+        background: var(--background-color-var);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-items: center;
+        justify-content: center;
+        border: var(--border-var);
+        padding: 0px 0px;
+        margin: 0px 0px 0px 0px;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .twitch-profile-msg-text-p {
+        background: rgba(0, 0, 0, 0);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-items: center;
+        justify-content: start;
+        border: var(--border-var);
+        padding: var(--padding-block-inline-var);
+        margin: var(--margin-top-left-bottom-right-var);
+        text-align: center;
+        font-size: 18px;
+        color: rgb(255, 255, 255);
+        text-shadow: 1px 1px 1px rgb(0, 0, 0);
+        text-decoration: none;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .chat-msg-slide-in {
+        animation: chat-msg-slide-in var(--animation-transition-time-var)
+          cubic-bezier(0.445, 0.05, 0.55, 0.95) forwards;
+        transition: animation var(--animation-transition-time-var)
+          cubic-bezier(0.445, 0.05, 0.55, 0.95);
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      @keyframes chat-msg-slide-in {
+        from {
+          transform: translateY(200px);
+          visibility: hidden;
+          opacity: 0;
+        }
+
+        to {
+          transform: translateY(0px);
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+
+      .chat-msg-slide-out {
+        animation: chat-msg-slide-out var(--animation-transition-time-var)
+          cubic-bezier(0.445, 0.05, 0.55, 0.95) forwards;
+        transition: animation var(--animation-transition-time-var)
+          cubic-bezier(0.445, 0.05, 0.55, 0.95);
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+        pointer-events: none;
+      }
+
+      @keyframes chat-msg-slide-out {
+        from {
+          transform: translateY(0px);
+          visibility: visible;
+          opacity: 1;
+        }
+
+        to {
+          transform: translateY(-200px);
+          visibility: hidden;
+          opacity: 0;
+        }
+      }
+    </style>
+    <style id="styleJsId"></style>
+    <script src="https://cdn.jsdelivr.net/npm/comfy.js@latest/dist/comfy.min.js"></script>
+    <script defer>
+      document.addEventListener("DOMContentLoaded", () => {
+        try {
+          const htmlProperty = "html";
+          const headProperty = "head";
+          const bodyProperty = "body";
+
+          const html =
+            document.documentElement || document.querySelector(htmlProperty);
+          const head = document.head || document.querySelector(headProperty);
+          const body = document.body || document.querySelector(bodyProperty);
+
+          const clear = "";
+
+          const copy = "copy";
+          const dragstart = "dragstart";
+          const keydown = "keydown";
+          const select = "select";
+
+          const fontFamilyVar = "--font-family-var";
+          const robotoBold = getComputedStyle(html)
+            .getPropertyValue(fontFamilyVar)
+            .trim();
+
+          const def = "default";
+          const none = "none";
+          const hidden = "hidden";
+          const visible = "visible";
+
+          const zero = 0;
+          const one = 1;
+
+          let twitchUserName = null || clear;
+          let twitchUserMessage = null || clear;
+
+          const mainChatBoxOverlayDivString = "mainChatBoxOverlayContainerId";
+          const mainChatBoxOverlayDiv =
+            document.getElementById(mainChatBoxOverlayDivString) ||
+            document.querySelector("#" + mainChatBoxOverlayDivString);
+
+          const maxVisibleMessages = 25;
+          const animationDurationMs = 750;
+          const slideInDistance = 200;
+
+          async function fetchTwitchAvatar(login) {
+            try {
+              const r = await fetch(`https://decapi.me/twitch/avatar/${login}`);
+
+              if (r.ok) {
+                const url = await r.text();
+
+                if (url.startsWith("https://")) return url;
+              }
+            } catch {}
+
+            return "";
+          }
+
+          function twitchChatToken() {
+            const ericson_tv = "ericson_tv";
+
+            ComfyJS.Init(ericson_tv);
+
+            ComfyJS.onChat = (user, message) => {
+              if (twitchUserName !== user || twitchUserMessage !== message) {
+                twitchUserName = user;
+                twitchUserMessage = message;
+
+                handleNewTwitchChatMessage();
+              }
+            };
+          }
+          twitchChatToken();
+
+          (function headStyleToken() {
+            const style =
+              document.getElementById("styleJsId") ||
+              document.querySelector("#styleJsId");
+
+            if (!style) {
+              const styleEl = document.createElement("style");
+              head.appendChild(styleEl);
+            }
+
+            const styleData = `
+            @import url("ericson_tv-chat-box-overlay.css");
+                
+            .twitch-profile-img[alt="${twitchUserName}"] {
+              background: rgba(0, 0, 0, 0) !important;
+              display: flex !important;
+              align-items: center !important;
+              align-content: center !important;
+              justify-items: center !important;
+              justify-content: center !important;
+              text-align: center !important;
+              font-size: 0px !important;
+              color: rgba(0, 0, 0, 0) !important;
+              text-shadow: ${none} !important;
+              text-decoration: ${none} !important;
+              -webkit-user-select: ${none} !important;
+              user-select: ${none} !important;
+              cursor: ${def} !important;
+              pointer-events: ${none} !important;
+            }
+
+            .chat-msg-slide-in {
+              animation: chat-msg-slide-in ${animationDurationMs}ms
+                cubic-bezier(0.445, 0.05, 0.55, 0.95) forwards;
+              transition: animation ${animationDurationMs}ms
+                cubic-bezier(0.445, 0.05, 0.55, 0.95);
+              -webkit-user-select: none;
+              user-select: none;
+              cursor: default;
+              pointer-events: none;
+            }
+                
+            @keyframes chat-msg-slide-in {
+              from {
+                transform: translateY(${slideInDistance}px);
+                visibility: ${hidden};
+                opacity: ${zero};
+              }
+                
+              to {
+                transform: translateY(0px);
+                visibility: ${visible};
+                opacity: ${one};
+              }
+            }
+                
+            .chat-msg-slide-out {
+              animation: chat-msg-slide-out ${animationDurationMs}ms
+                cubic-bezier(0.445, 0.05, 0.55, 0.95) forwards;
+              transition: animation ${animationDurationMs}ms
+                cubic-bezier(0.445, 0.05, 0.55, 0.95);
+              -webkit-user-select: none;
+              user-select: none;
+              cursor: default;
+              pointer-events: none;
+            }
+                
+            @keyframes chat-msg-slide-out {
+              from {
+                transform: translateY(0px);
+                visibility: ${visible};
+                opacity: ${one};
+              }
+                
+              to {
+                transform: translateY(
+                  var(--twitch-overlay-slide-out-distance, -200px)
+                );
+                visibility: ${hidden};
+                opacity: ${zero};
+              }
+            }
+        `;
+
+            if (head && style) style.innerHTML = styleData;
+          })();
+
+          (function bodyToken() {
+            const elementArray = [copy, dragstart, keydown, select];
+
+            elementArray.forEach((event) => {
+              if (!event) return;
+
+              body.addEventListener(event, (e) => e.preventDefault());
+            });
+
+            Object.assign(body.style, {
+              fontFamily: robotoBold,
+              webkitUserSelect: none,
+              userSelect: none,
+              cursor: def,
+              pointerEvents: none,
+            });
+          })();
+
+          function htmlElementSecurityToken(element) {
+            if (!element) return;
+
+            const eventArray = [copy, dragstart, keydown, select];
+
+            eventArray.forEach((event) => {
+              if (!event) return;
+
+              element.addEventListener(event, (eventObject) =>
+                eventObject.preventDefault(),
+              );
+            });
+
+            Object.assign(element.style, {
+              fontFamily: robotoBold,
+              webkitUserSelect: none,
+              userSelect: none,
+              cursor: def,
+              pointerEvents: none,
+            });
+          }
+
+          function slideOutOverflowingMessagesToken(elementToKeep) {
+            if (!mainChatBoxOverlayDiv) return;
+
+            const containerTopPosition =
+              mainChatBoxOverlayDiv.getBoundingClientRect().top;
+
+            Array.from(mainChatBoxOverlayDiv.children).forEach((child) => {
+              if (child === elementToKeep) return;
+              if (child.classList.contains("removing")) return;
+
+              const childRect = child.getBoundingClientRect();
+              const isClippedAtTop = childRect.top < containerTopPosition;
+
+              if (!isClippedAtTop) return;
+
+              const slideOutDistance = childRect.height + 40;
+
+              child.style.setProperty(
+                "--twitch-overlay-slide-out-distance",
+                "-" + slideOutDistance.toString() + "px",
+              );
+
+              child.classList.add("removing");
+              child.classList.add("chat-msg-slide-out");
+
+              setTimeout(() => {
+                if (child.parentNode) {
+                  child.remove();
+                }
+              }, animationDurationMs);
+            });
+          }
+
+          function mainTwitchChatOverlayAnimationTransitionToken(
+            rootEl,
+            previousRects,
+          ) {
+            if (!rootEl) return;
+
+            Array.from(mainChatBoxOverlayDiv.children).forEach((child) => {
+              if (child === rootEl) return;
+              if (child.classList.contains("removing")) return;
+
+              const previousRect = previousRects.get(child);
+
+              if (!previousRect) return;
+
+              const newRect = child.getBoundingClientRect();
+              const deltaY = previousRect.top - newRect.top;
+
+              if (Math.abs(deltaY) < 1) return;
+
+              child.style.transition = none;
+              child.style.transform = "translateY(" + deltaY.toString() + "px)";
+
+              requestAnimationFrame(() => {
+                child.style.transition =
+                  "transform " +
+                  animationDurationMs.toString() +
+                  "ms cubic-bezier(0.445, 0.05, 0.55, 0.95)";
+
+                child.style.transform = "translateY(0px)";
+
+                child.addEventListener(
+                  "transitionend",
+                  () => {
+                    child.style.removeProperty("transition");
+                    child.style.removeProperty("transform");
+                  },
+                  { once: true },
+                );
+              });
+            });
+
+            rootEl.classList.add("chat-msg-slide-in");
+          }
+
+          function mainChatBoxMechanicsToken() {
+            let safetyGuardCounter = zero;
+
+            while (
+              mainChatBoxOverlayDiv.children.length > maxVisibleMessages &&
+              safetyGuardCounter < maxVisibleMessages
+            ) {
+              const elementChild = Array.from(
+                mainChatBoxOverlayDiv.children,
+              ).find((child) => !child.classList.contains("removing"));
+
+              if (!elementChild) break;
+
+              mainChatBoxOverlayDiv.removeChild(elementChild);
+
+              safetyGuardCounter = safetyGuardCounter + one;
+            }
+          }
+
+          function twitchChatBoxOverlayToken() {
+            const div = "div";
+            const img = "img";
+            const span = "span";
+            const p = "p";
+            const br = "br";
+
+            const width = "width";
+            const height = "height";
+            const src = "src";
+            const alt = "alt";
+            const loading = "loading";
+
+            const aspectRatio = (300).toString();
+            const eager = "eager";
+
+            const cssClassTwitchProfileDiv = "twitch-profile-container";
+            const cssClassTwitchProfilePartOneDiv =
+              "twitch-profile-part-one-container";
+            const cssClassTwitchProfileBgImgDiv =
+              "twitch-profile-bg-img-container";
+            const cssClassTwitchProfileBgDiv = "twitch-profile-bg-container";
+            const cssClassTwitchProfileImg = "twitch-profile-img";
+            const cssClassTwitchProfileNameDiv =
+              "twitch-profile-name-container";
+            const cssClassTwitchProfileNameSpan = "twitch-profile-name-span";
+            const cssClassTwitchProfilePartTwoDiv =
+              "twitch-profile-part-two-container";
+            const cssClassTwitchProfileMsgTextDiv =
+              "twitch-profile-msg-text-container";
+            const cssClassTwitchProfileMsgTextP = "twitch-profile-msg-text-p";
+
+            const createTextToken = (el, text) =>
+              el.appendChild(document.createTextNode(text));
+
+            const createBreakElToken = (el) =>
+              el.appendChild(document.createElement(br));
+
+            const twitchProfileDivEl = document.createElement(div);
+            twitchProfileDivEl.classList.add(cssClassTwitchProfileDiv);
+            mainChatBoxOverlayDiv.appendChild(twitchProfileDivEl);
+
+            const twitchProfilePartOneDivEl = document.createElement(div);
+            twitchProfilePartOneDivEl.classList.add(
+              cssClassTwitchProfilePartOneDiv,
+            );
+            twitchProfileDivEl.appendChild(twitchProfilePartOneDivEl);
+
+            const twitchProfileBgImgDivEl = document.createElement(div);
+            twitchProfileBgImgDivEl.classList.add(
+              cssClassTwitchProfileBgImgDiv,
+            );
+            twitchProfilePartOneDivEl.appendChild(twitchProfileBgImgDivEl);
+
+            const twitchProfileBgDivEl = document.createElement(div);
+            twitchProfileBgDivEl.classList.add(cssClassTwitchProfileBgDiv);
+            twitchProfileBgImgDivEl.appendChild(twitchProfileBgDivEl);
+
+            (function twitchImgToken() {
+              fetchTwitchAvatar(twitchUserName).then((twitchImgUrl) => {
+                if (!twitchImgUrl) {
+                  console.error(
+                    "Kein Profilbild gefunden für:",
+                    twitchUserName,
+                  );
+
+                  return;
+                }
+
+                const twitchProfileImgEl = document.createElement(img);
+                twitchProfileImgEl.setAttribute(width, aspectRatio);
+                twitchProfileImgEl.setAttribute(height, aspectRatio);
+                twitchProfileImgEl.setAttribute(src, twitchImgUrl);
+                twitchProfileImgEl.setAttribute(alt, twitchUserName);
+                twitchProfileImgEl.classList.add(cssClassTwitchProfileImg);
+                twitchProfileImgEl.setAttribute(loading, eager);
+                twitchProfileBgDivEl.appendChild(twitchProfileImgEl);
+
+                twitchProfileImgEl.addEventListener("error", () => {
+                  console.error(
+                    "Profilbild konnte nicht geladen werden:",
+                    twitchImgUrl,
+                  );
+                });
+
+                const imgSecurityToken = () => {
+                  const eventArray = [copy, dragstart, keydown, select];
+
+                  eventArray.forEach((event) => {
+                    if (!event) return;
+
+                    twitchProfileImgEl.addEventListener(event, (e) =>
+                      e.preventDefault(),
+                    );
+                  });
+
+                  Object.assign(twitchProfileImgEl.style, {
+                    fontFamily: robotoBold,
+                    webkitUserSelect: none,
+                    userSelect: none,
+                    cursor: def,
+                    pointerEvents: none,
+                  });
+                };
+
+                imgSecurityToken();
+              });
+            })();
+
+            const twitchProfileNameDivEl = document.createElement(div);
+            twitchProfileNameDivEl.classList.add(cssClassTwitchProfileNameDiv);
+            twitchProfilePartOneDivEl.appendChild(twitchProfileNameDivEl);
+
+            const twitchProfileNameSpanEl = document.createElement(span);
+            twitchProfileNameSpanEl.classList.add(
+              cssClassTwitchProfileNameSpan,
+            );
+            twitchProfileNameSpanEl.textContent = twitchUserName;
+            twitchProfileNameDivEl.appendChild(twitchProfileNameSpanEl);
+
+            const twitchProfilePartTwoDivEl = document.createElement(div);
+            twitchProfilePartTwoDivEl.classList.add(
+              cssClassTwitchProfilePartTwoDiv,
+            );
+            twitchProfileDivEl.appendChild(twitchProfilePartTwoDivEl);
+
+            const twitchProfileMsgTextDivEl = document.createElement(div);
+            twitchProfileMsgTextDivEl.classList.add(
+              cssClassTwitchProfileMsgTextDiv,
+            );
+            twitchProfilePartTwoDivEl.appendChild(twitchProfileMsgTextDivEl);
+
+            const twitchProfileMsgTextPEl = document.createElement(p);
+            twitchProfileMsgTextPEl.classList.add(
+              cssClassTwitchProfileMsgTextP,
+            );
+            createTextToken(twitchProfileMsgTextPEl, twitchUserMessage);
+            twitchProfileMsgTextDivEl.appendChild(twitchProfileMsgTextPEl);
+
+            htmlElementSecurityToken(twitchProfileDivEl);
+            htmlElementSecurityToken(twitchProfilePartOneDivEl);
+            htmlElementSecurityToken(twitchProfileBgImgDivEl);
+            htmlElementSecurityToken(twitchProfileBgDivEl);
+            htmlElementSecurityToken(twitchProfileNameDivEl);
+            htmlElementSecurityToken(twitchProfileNameSpanEl);
+            htmlElementSecurityToken(twitchProfilePartTwoDivEl);
+            htmlElementSecurityToken(twitchProfileMsgTextDivEl);
+            htmlElementSecurityToken(twitchProfileMsgTextPEl);
+
+            return twitchProfileDivEl;
+          }
+
+          function handleNewTwitchChatMessage() {
+            const previousRects = new Map();
+
+            Array.from(mainChatBoxOverlayDiv.children).forEach((child) => {
+              if (child.classList.contains("removing")) return;
+
+              previousRects.set(child, child.getBoundingClientRect());
+            });
+
+            const newRootEl = twitchChatBoxOverlayToken();
+
+            mainChatBoxMechanicsToken();
+
+            slideOutOverflowingMessagesToken(newRootEl);
+
+            mainTwitchChatOverlayAnimationTransitionToken(
+              newRootEl,
+              previousRects,
+            );
+          }
+
+          function twitchSlideInToken(twitchProfileDivEl) {
+            twitchProfileDivEl.classList.add("chat-msg-slide-in");
+          }
+        } catch (error) {
+          console.error("Haupt-Fehler:", error);
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div
+      id="mainChatBoxOverlayContainerId"
+      class="main-chat-box-overlay-container"
+    ></div>
+  </body>
+</html>
